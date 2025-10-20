@@ -1,0 +1,68 @@
+{% extends "layout.njk" %}
+{% import "partials/card.njk" as card %}
+
+{% block styles %}
+  <link rel="stylesheet" href="/styles/payment.css">
+  <style>
+    .payment-methods a {
+      text-decoration: none;
+      color: inherit;
+      cursor: pointer;
+    }
+  </style>
+{% endblock %}
+
+{% block content %}
+  {% call card.render("Finalizar Pagamento com PIX", "payment-container") %}
+    <div class="payment-methods">
+      <a href="/checkout/credit-card" class="method" data-method="credit-card">
+        <i class="material-icons">credit_card</i>
+        Cartão de Crédito
+      </a>
+      <a href="/checkout/pix" class="method active" data-method="pix">
+        <i class="material-icons">qr_code</i>
+        PIX
+      </a>
+    </div>
+
+    <!-- Formulário de pagamento com PIX -->
+    <form action="/payment/process" method="POST" class="payment-form pix">
+      <input type="hidden" name="payment_method" value="pix">
+
+      <div class="pix-info">
+        <p>Escaneie o QR Code abaixo para realizar o pagamento via PIX.</p>
+        <img src="{{ qrCodeDataUrl }}" alt="QR Code PIX">
+      </div>
+
+      <button type="submit" class="btn-payment">
+        <i class="material-icons">check_circle</i>
+        Confirmar Pagamento PIX
+      </button>
+    </form>
+
+    <div class="security-info">
+      <i class="material-icons">https</i>
+      <span>Pagamento seguro com criptografia de 256-bit</span>
+    </div>
+  {% endcall %}
+{% endblock %}
+
+{% block scripts %}
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const methodCredit = document.querySelector('[data-method="credit-card"]');
+      const methodPix = document.querySelector('[data-method="pix"]');
+
+      if(methodCredit) {
+        methodCredit.addEventListener("click", function() {
+          window.location.href = "/checkout/credit-card";
+        });
+      }
+      if(methodPix) {
+        methodPix.addEventListener("click", function() {
+          window.location.href = "/checkout/pix";
+        });
+      }
+    });
+  </script>
+{% endblock %}

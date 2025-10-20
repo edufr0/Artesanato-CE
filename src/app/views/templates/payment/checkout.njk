@@ -1,0 +1,21 @@
+{% extends "layout.njk" %}
+{% import "partials/card.njk" as card %}
+
+{% block content %}
+  {% call card.render("Pagamento Aprovado!", "payment-success") %}
+    <div class="payment-container">
+      <div class="success-message">
+        <i class="material-icons large-icon">check_circle</i>
+        <h2>Pagamento realizado com sucesso!</h2>
+        <p>ID do Pedido: {{ orderId }}</p>
+
+        <div class="summary">
+          <p>Um e-mail de confirmação foi enviado para sua caixa postal</p>
+          <p>Previsão de entrega: 5 dias úteis</p>
+        </div>
+
+        <a href="/products/search" class="btn">Voltar às Compras</a>
+      </div>
+    </div>
+  {% endcall %}
+{% endblock %}

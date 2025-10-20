@@ -1,0 +1,27 @@
+{% extends "layout.njk" %}
+{% import "partials/section-products.njk" as section %}
+
+{% block content %}
+  <section class="search-products container" style="display: flex; gap: 20px;">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h2>{{ search.term }}</h2>
+        <p style="color: #b8c0dc;">{{ search.total }} encontrado(s)</p>
+      </div>
+      <nav class="sidebar-nav">
+        <ul>
+          {% for category in categories %}
+            <li>
+              <a href="/products/search?filter={{ search.term }}&category={{ category.id }}">
+                {{ category.name }}
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      </nav>
+    </aside>
+    <div class="content">
+      {{ section.products("", "searched", products) }}
+    </div>
+  </section>
+{% endblock %}

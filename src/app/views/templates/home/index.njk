@@ -1,0 +1,49 @@
+{% extends "layout.njk" %}
+{% import "partials/section-products.njk" as section %}
+
+{% block content %}
+  <section class="home-container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h2>Categorias</h2>
+      </div>
+      <nav class="sidebar-nav">
+        <ul>
+          <li>
+            <a href="/" class="{% if not selectedCategory %}active{% endif %}">
+              Todas as categorias
+            </a>
+          </li>
+          {% for category in categories %}
+            <li>
+              <a href="/?category={{ category.id }}" class="{% if category.id == selectedCategory %}active{% endif %}">
+                {{ category.name }}
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      </nav>
+    </aside>
+    <div class="content">
+      {% if products|length > 0 %}
+        {{ section.products("Produtos da categoria", "container", products) }}
+      {% else %}
+        <p>Nenhum produto encontrado nesta categoria.</p>
+      {% endif %}
+    </div>
+  </section>
+
+  {% if totalPages > 1 %}
+    <div class="pagination">
+      {% if currentPage > 1 %}
+        <a href="?page={{ currentPage - 1 }}&category={{ selectedCategory | default('') }}" class="prev">Anterior</a>
+      {% endif %}
+      {% for page in range(1, totalPages + 1) %}
+        <a href="?page={{ page }}&category={{ selectedCategory | default('') }}" class="{% if page == currentPage %}active{% endif %}">{{ page }}</a>
+      {% endfor %}
+      {% if currentPage < totalPages %}
+        <a href="?page={{ currentPage + 1 }}&category={{ selectedCategory | default('') }}" class="next">Próximo</a>
+      {% endif %}
+    </div>
+  {% endif %}
+{% endblock %}
