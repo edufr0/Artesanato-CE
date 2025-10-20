@@ -59,7 +59,7 @@ Siga os passos abaixo:
 
 ```bash
 # Abra um terminal e copie este repositório com o comando
-$ git clone https://github.com/Ivo-Aragao/Ce-Artesanato
+$ git clone https://github.com/edufr0/Artesanato-CE
 # ou use a opção de download.
 
 # Crie um .env na pasta do server.js e escreva:
@@ -98,5 +98,5 @@ Esse projeto está sob a licença MIT. Veja o arquivo [LICENSE](/LICENSE) para m
 
 ---
 
-Feito com :purple_heart: by [Ivo Aragão, Eduardo, Igor, Joacir]
+Feito com :purple_heart: by [Eduardo , Ivo , Igor e Joacir]
 
